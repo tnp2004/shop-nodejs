@@ -24,7 +24,6 @@
                <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Description</th>
                     <th scope="col">Picture</th>
                     <th scope="col">Product id</th>
                     <th scope="col">Management</th>
@@ -35,12 +34,13 @@
                <tr>
                    <td><%= item.name %></td>
                    <td><%= item.price %></td>
-                   <td><%= item.description %></td>
                    <td><%= item.picture %></td>
                    <td><%= item._id %></td>
-                   <td>
-                        <a href="/modify/<%= item._id %>" class="btn btn-primary"><i class="fa-solid fa-screwdriver"></i> modify</a>
-                        <a href="/delete/<%= item._id %>" onclick="return confirm('Are you sure you want to delete <%= item.name %> ?')" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> delete</a>
+                   <td style="width: 20%;">
+                        <a href="/modify/<%= item._id %>" class="btn btn-primary">
+                            <i class="fa-solid fa-screwdriver"></i> modify</a>
+                        <a href="/delete/<%= item._id %>" onclick="return confirm('Are you sure you want to delete <%= item.name %> ?')" class="btn btn-danger">
+                            <i class="fa-solid fa-trash-can"></i> delete</a>
                    </td>
                </tr>
                <%})%>

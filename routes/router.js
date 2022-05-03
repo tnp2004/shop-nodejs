@@ -112,10 +112,14 @@ router.get('/login', (req, res) => {
 router.post('/login/check', (req, res) => {
     usersData.findOne({username: req.body.username}).exec((err, doc) => {
         if(doc) {
-            req.session.username = req.body.username
-            req.session.password = req.body.password
-            req.session.login = true
-            res.redirect('/')
+            if(doc.password == req.body.password) {
+                req.session.username = req.body.username
+                req.session.password = req.body.password
+                req.session.login = true
+                res.redirect('/')
+            }else {
+                res.redirect('/login')
+            }
         }else {
             res.redirect('/login')
         }
