@@ -20,8 +20,8 @@
             <div class="col">
               <div class="card" style="height: 100%;">
                 <input type="hidden" value="<%= item._id %>" name="id">
-                <a href="/productInfo/<%= item._id %>" class="mx-auto">
-                    <img src="pictures/products/<%= item.picture %>" class="card-img-top p-5" alt="<%= item.name %>" style="width: 300px;">
+                <a href="/productInfo/<%= item._id %>" class="mx-auto text-center">
+                    <img src="pictures/products/<%= item.picture %>" class="card-img-top p-5" alt="<%= item.name %>" style="width: 60%;">
                 </a>
                 <div class="card-body">
                   <h5 class="card-title"><a class="text-decoration-none text-dark" href="/productInfo/<%= item._id %>"><%= item.name %></a>  <i class="fa-solid fa-star"></i> 3.5</h5>
