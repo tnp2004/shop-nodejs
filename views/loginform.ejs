@@ -18,12 +18,12 @@
        <form action="/login/check" method="POST" style="width: 700px;" class="mx-auto">
             <h4>Login</h4>
            <div class="form-group">
-               <label class="label-control">Username</label>
-               <input type="text" name="username" class="form-control my-2" id="nameValidateIn" required>
+               <label for="usernameform" class="label-control">Username</label>
+               <input type="text" name="username" class="form-control my-2" id="usernameform" required>
            </div>
            <div class="form-group">
-            <label class="label-control">Password</label>
-               <input type="text" name="password" class="form-control my-2" required>
+            <label for="passwordform" class="label-control">Password</label>
+               <input type="password" id="passwordform" name="password" class="form-control my-2" required>
            </div>
            <button type="submit" class="btn btn-success form-control my-2">Login</button>
            <p class="text-center">

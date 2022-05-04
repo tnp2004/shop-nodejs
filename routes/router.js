@@ -80,7 +80,7 @@ router.post('/register/save', (req, res) => {
     })
     Users.registerUser(userData, err => {
         if(err) console.log(err)
-        res.redirect('/')
+        res.redirect('/login')
     })
 })
 
@@ -111,7 +111,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login/check', (req, res) => {
     usersData.findOne({username: req.body.username}).exec((err, doc) => {
-        if(doc) {
+       if(doc) {
             if(doc.password == req.body.password) {
                 req.session.username = req.body.username
                 req.session.password = req.body.password
@@ -119,11 +119,10 @@ router.post('/login/check', (req, res) => {
                 res.redirect('/')
             }else {
                 res.redirect('/login')
-            }
-        }else {
-            res.redirect('/login')
-        }
-        
+            }   
+       }else {
+        res.redirect('/login')
+        }   
     })
 })
 
@@ -134,14 +133,40 @@ router.get('/logout', (req, res) => {
     })
 })
 
-router.get('/productInfo', (req, res) => {
-    res.render('productData', {login: req.session.login, username: req.session.username})
-})
-
 router.get('/productInfo/:id', (req, res) => {
     Product.findOne({_id: req.params.id}).exec((err, doc) => {
         res.render('productData', {login: req.session.login, username: req.session.username, product: doc})
     })
+})
+
+router.get('/member', (req, res) => {
+   if(req.session.login) {
+        Users.find().exec((err, doc) => {
+            res.render('member', {memberData: doc, login: req.session.login, username: req.session.username})
+        })
+   }else {
+       res.redirect('/login')
+   }
+})
+
+router.post('/statusupdate', (req, res) => {
+    Users.findOne({username: req.session.username}).exec((err, doc) => {
+      if(req.session.login) {
+        if(doc.status == 'admin') {
+            const statusChange = {
+                status: req.body.select
+            }
+           Users.findByIdAndUpdate(req.body.userid, statusChange, {useFindAndModify: false}).exec(err => {
+               if(err) console.log(err)
+               res.redirect('/member')
+           })
+        }else {
+            res.redirect('/member')
+        }
+      }else {
+          res.redirect('/login')
+      }
+    }) 
 })
 
 module.exports = router;
